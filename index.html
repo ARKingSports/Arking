@@ -3,85 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشغل فيديو احترافي</title>
-    <!-- إضافة ملفات CSS الخاصة بـ Video.js -->
-    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
-    <!-- إضافة ملفات CSS للوضع المظلم -->
+    <title>واجهة قنوات احترافية</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #1e1e1e; /* خلفية داكنة */
-            color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
+            background-color: #f4f4f4;
         }
-        .video-container {
-            width: 80%;
-            max-width: 800px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            background: #000;
+        .channel-card {
+            transition: transform 0.3s ease;
         }
-        .vjs-default-skin {
-            color: #fff; /* لون النص الأبيض */
-        }
-        .vjs-control-bar {
-            background: rgba(0, 0, 0, 0.7); /* شفافية التحكم */
+        .channel-card:hover {
+            transform: translateY(-5px);
         }
     </style>
 </head>
 <body>
-    <div class="video-container">
-        <!-- مشغل الفيديو -->
-        <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto">
-            <source src="https://stream.supertv.gg:3003/supertv/sport/stv1/ch3/ch3_720.m3u8" type="application/x-mpegURL">
-            <track kind="subtitles" src="path/to/subtitles.vtt" srclang="ar" label="العربية" default>
-            <p class="vjs-no-js">
-                لتشغيل الفيديو، يرجى تمكين JavaScript أو استخدام متصفح يدعم تشغيل الفيديو.
-            </p>
-        </video>
+    <div class="container">
+        <h1 class="text-center my-4">قائمة القنوات</h1>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card channel-card">
+                    <img src="https://via.placeholder.com/200x150" class="card-img-top" alt="قناة 1">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">قناة 1</h5>
+                        <p class="card-text text-center">وصف قصير للقناة 1</p>
+                        <a href="https://path/to/channel1.m3u8" class="btn btn-primary btn-block">مشاهدة</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card channel-card">
+                    <img src="https://via.placeholder.com/200x150" class="card-img-top" alt="قناة 2">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">قناة 2</h5>
+                        <p class="card-text text-center">وصف قصير للقناة 2</p>
+                        <a href="https://path/to/channel2.m3u8" class="btn btn-primary btn-block">مشاهدة</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card channel-card">
+                    <img src="https://via.placeholder.com/200x150" class="card-img-top" alt="قناة 3">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">قناة 3</h5>
+                        <p class="card-text text-center">وصف قصير للقناة 3</p>
+                        <a href="https://path/to/channel3.m3u8" class="btn btn-primary btn-block">مشاهدة</a>
+                    </div>
+                </div>
+            </div>
+            <!-- يمكنك إضافة المزيد من القنوات هنا -->
+        </div>
     </div>
-
-    <!-- إضافة مكتبة Video.js -->
-    <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
-    <!-- إضافة دعم HLS عبر videojs-http-streaming -->
-    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.9.3/dist/videojs-http-streaming.min.js"></script>
-    <!-- إضافة اختيار الجودة -->
-    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-quality-levels@2.0.9/dist/videojs-contrib-quality-levels.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@1.1.4/dist/videojs-hls-quality-selector.min.js"></script>
-    <script>
-        // تهيئة مشغل الفيديو
-        var player = videojs('my-video', {
-            controls: true, // تفعيل عناصر التحكم
-            autoplay: false, // التشغيل التلقائي (يمكن تغييره إلى true)
-            fluid: true, // جعل المشغل سائلاً (responsive)
-            responsive: true, // تفعيل الوضع المتجاوب
-            playbackRates: [0.5, 1, 1.5, 2], // خيارات سرعة التشغيل
-            controlBar: {
-                children: [
-                    'playToggle',
-                    'volumePanel',
-                    'currentTimeDisplay',
-                    'timeDivider',
-                    'durationDisplay',
-                    'progressControl',
-                    'liveDisplay',
-                    'remainingTimeDisplay',
-                    'customControlSpacer',
-                    'playbackRateMenuButton', // زر سرعة التشغيل
-                    'chaptersButton',
-                    'descriptionsButton',
-                    'subsCapsButton', // زر الترجمة
-                    'audioTrackButton',
-                    'fullscreenToggle'
-                ]
-            }
-        });
-
-        // تفعيل اختيار الجودة
-        player.hlsQualitySelector();
-    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-</html>
+</html> 
