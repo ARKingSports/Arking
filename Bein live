@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشغل فيديو احترافي</title>
+    <!-- إضافة ملفات CSS الخاصة بـ Video.js -->
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
+    <!-- إضافة ملفات CSS للوضع المظلم -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e; /* خلفية داكنة */
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .video-container {
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            background: #000;
+        }
+        .vjs-default-skin {
+            color: #fff; /* لون النص الأبيض */
+        }
+        .vjs-control-bar {
+            background: rgba(0, 0, 0, 0.7); /* شفافية التحكم */
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- مشغل الفيديو -->
+        <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="100%" height="auto">
+            <source src="https://stream.supertv.gg:3003/supertv/sport/stv3/ch3/adaptive.m3u8" type="application/x-mpegURL">
+            <track kind="subtitles" src="path/to/subtitles.vtt" srclang="ar" label="العربية" default>
+            <p class="vjs-no-js">
+                لتشغيل الفيديو، يرجى تمكين JavaScript أو استخدام متصفح يدعم تشغيل الفيديو.
+            </p>
+        </video>
+    </div>
+
+    <!-- إضافة مكتبة Video.js -->
+    <script src="https://vjs.zencdn.net/7.15.4/video.min.js"></script>
+    <!-- إضافة دعم HLS عبر videojs-http-streaming -->
+    <script src="https://cdn.jsdelivr.net/npm/videojs-http-streaming@2.9.3/dist/videojs-http-streaming.min.js"></script>
+    <!-- إضافة اختيار الجودة -->
+    <script src="https://cdn.jsdelivr.net/npm/videojs-contrib-quality-levels@2.0.9/dist/videojs-contrib-quality-levels.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-hls-quality-selector@1.1.4/dist/videojs-hls-quality-selector.min.js"></script>
+    <script>
+        // تهيئة مشغل الفيديو
+        var player = videojs('my-video', {
+            controls: true, // تفعيل عناصر التحكم
+            autoplay: false, // التشغيل التلقائي (يمكن تغييره إلى true)
+            fluid: true, // جعل المشغل سائلاً (responsive)
+            responsive: true, // تفعيل الوضع المتجاوب
+            playbackRates: [0.5, 1, 1.5, 2], // خيارات سرعة التشغيل
+            controlBar: {
+                children: [
+                    'playToggle',
+                    'volumePanel',
+                    'currentTimeDisplay',
+                    'timeDivider',
+                    'durationDisplay',
+                    'progressControl',
+                    'liveDisplay',
+                    'remainingTimeDisplay',
+                    'customControlSpacer',
+                    'playbackRateMenuButton', // زر سرعة التشغيل
+                    'chaptersButton',
+                    'descriptionsButton',
+                    'subsCapsButton', // زر الترجمة
+                    'audioTrackButton',
+                    'fullscreenToggle'
+                ]
+            }
+        });
+
+        // تفعيل اختيار الجودة
+        player.hlsQualitySelector();
+    </script>
+</body>
+</html>
